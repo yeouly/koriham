@@ -7,13 +7,16 @@
 .mypage-scroll {
   flex: 1;
   overflow-y: auto;
-  padding: 20px 16px calc(var(--nav-h) + 8px);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
   -webkit-overflow-scrolling: touch;
 }
 .mypage-scroll::-webkit-scrollbar { display: none; }
+
+#mypage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 16px calc(var(--nav-h) + 20px);
+}
 
 /* ── Streak card ── */
 .streak-card {

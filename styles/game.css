@@ -250,13 +250,9 @@
 
 .feedback-english {
   font-size: 0.85rem;
-  color: var(--color-text);
+  color: var(--color-text-sub);
   line-height: 1.65;
   text-align: left;
-  background: #FFF8F0;
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--r-small);
-  padding: 12px 14px;
 }
 
 .feedback-explanation {
@@ -296,8 +292,8 @@
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  background: var(--color-soft-blue-light);
-  border: 1.5px solid var(--color-soft-blue);
+  background: var(--color-primary-light);
+  border: 1.5px solid rgba(255,138,61,0.35);
   border-radius: var(--r-small);
   padding: 12px 14px;
 }
@@ -305,8 +301,8 @@
 .hint-label {
   font-size: 0.7rem;
   font-weight: 700;
-  color: #4A88C0;
-  background: var(--color-soft-blue);
+  color: #B85500;
+  background: rgba(255,138,61,0.25);
   border-radius: var(--r-chip);
   padding: 2px 9px;
   flex-shrink: 0;
