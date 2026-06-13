@@ -1,54 +1,143 @@
 {
-  "id": "SUBWAY_001",
-  "title": "지하철 타기",
-  "titleEn": "Taking the Subway",
-  "location": "지하철역",
-  "locationKey": "subway",
-  "level": "A1",
-  "theme": "transport",
-  "rewardCardId": "card_subway_001",
-  "background": "assets/images/backgrounds/subway_station.png",
-  "npc": {
-    "id": "subway_officer",
-    "name": "역무원",
-    "nameEn": "Station Staff",
-    "emoji": "👷",
-    "image": "assets/images/npc/subway_officer.png"
-  },
-  "steps": [
+  "scenario_id": "SUBWAY_001",
+  "scenario_title": "지하철역에서 환승하고 출구 찾기",
+  "situation": "지하철역에서 노선을 확인하고 환승한 뒤 목적지와 가까운 출구를 찾아간다.",
+  "difficulty": "A2",
+  "scenes": [
     {
-      "id": "step_01",
-      "type": "dialogue",
-      "speaker": "역무원",
-      "text": "어디 가세요?",
-      "audio": "assets/audio/voices/SUBWAY_001/step_01.mp3",
-      "vocab": [
-        { "word": "어디", "romanization": "eodi", "meaning": "where" },
-        { "word": "가세요", "romanization": "gaseyo", "meaning": "Are you going? (polite)" }
-      ]
+      "scene_id": "SUBWAY_001_01",
+      "background": "지하철역 개찰구 앞, 교통카드 단말기와 노선 안내 표지판이 보인다.",
+      "npc_name": "역무원",
+      "npc_dialogue": "안녕하세요. 교통카드 찍고 들어가시면 돼요. 어디까지 가세요?",
+      "npc_dialogue_english": "Hello. Tap your transit card and you can go in. Where are you going?",
+      "options": [
+        { "id": "A", "text": "홍대입구 가요. 막차 몇 시예요?", "text_english": "I'm going to Hongik Univ. What time is the last train?" },
+        { "id": "B", "text": "홍대입구 가요. 막차 몇 시였어요?", "text_english": "I'm going to Hongik Univ. What time was the last train?" },
+        { "id": "C", "text": "홍대입구 가요. 막차 몇 분이에요?", "text_english": "I'm going to Hongik Univ. What minute is the last train?" }
+      ],
+      "correct_option": "A",
+      "hint": "아직 막차를 타기 전이에요. 시간을 물을 때 쓰는 표현을 생각해 보세요.",
+      "feedback_correct": "좋아요! 목적지도 말하고 막차 시간도 자연스럽게 물어봤어요.",
+      "feedback_wrong": "[시제 오류] '몇 시였어요?'는 과거 시간을 물을 때 쓰는 표현이에요. 지금은 앞으로 탈 막차 시간을 묻는 상황이에요.\n[어휘 혼동] '몇 분'은 분 단위를 물을 때 쓰지만, 막차 시간은 보통 '몇 시예요?'라고 물어요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 2 - Tense Error] '몇 시였어요?' asks about a past time. You are asking about the upcoming last train, so '몇 시예요?' is natural.",
+        "C": "Almost! [Type 5 - Vocabulary Confusion] '몇 분' asks about minutes, but when asking the time of the last train, Koreans usually say '몇 시예요?'."
+      },
+      "vocab_point": {
+        "expression": "막차 몇 시예요?",
+        "meaning": "What time is the last train?",
+        "real_tip": "늦은 밤에는 역무원에게 'OO역 가는 막차 몇 시예요?'라고 물으면 더 정확하게 안내받을 수 있어요."
+      },
+      "next_scene_correct": "SUBWAY_001_02",
+      "next_scene_wrong": "hint_and_retry"
     },
     {
-      "id": "step_02",
-      "type": "choice",
-      "speaker": "역무원",
-      "text": "티켓은 어디서 사요?",
-      "audio": "assets/audio/voices/SUBWAY_001/step_02.mp3",
-      "vocab": [
-        { "word": "티켓", "romanization": "tiket", "meaning": "ticket" },
-        { "word": "어디서", "romanization": "eodiseo", "meaning": "where (from)" },
-        { "word": "사요", "romanization": "sayo", "meaning": "buy (polite informal)" }
+      "scene_id": "SUBWAY_001_02",
+      "background": "역 안 노선도 앞, 여러 색깔의 지하철 노선과 역 이름이 복잡하게 표시되어 있다.",
+      "npc_name": "역무원",
+      "npc_dialogue": "홍대입구역 가시는 거면 노선부터 확인하시면 돼요. 어느 노선인지 아세요?",
+      "npc_dialogue_english": "If you're going to Hongik Univ. Station, check the line first. Do you know which line it is?",
+      "options": [
+        { "id": "A", "text": "홍대입구역은 몇 호선이에요?", "text_english": "What line is Hongik Univ. Station on?" },
+        { "id": "B", "text": "홍대입구역은 몇 호선으로예요?", "text_english": "What line is Hongik Univ. Station as?" },
+        { "id": "C", "text": "홍대입구역은 몇 번 출구예요?", "text_english": "Which exit number is Hongik Univ. Station?" }
       ],
-      "choices": [
-        { "id": "c1", "text": "저기 자동발매기에서 사요.", "isCorrect": true,
-          "feedback": "Perfect! '저기' (over there) + '자동발매기' (ticket machine) = natural answer.",
-          "feedbackKo": "자동발매기에서 사는 게 맞아요!" },
-        { "id": "c2", "text": "버스에서 사요.", "isCorrect": false,
-          "feedback": "'버스' means bus — wrong location for subway tickets!",
-          "feedbackKo": "버스는 지하철이 아니에요 😅" },
-        { "id": "c3", "text": "모르겠어요.", "isCorrect": false,
-          "feedback": "This means 'I don't know.' — grammatically fine but not helpful!",
-          "feedbackKo": "문법은 맞지만 조금 더 알아볼까요?" }
-      ]
+      "correct_option": "A",
+      "hint": "지하철 노선을 물을 때는 '출구'가 아니라 '호선'을 사용해요.",
+      "feedback_correct": "정답이에요! 지하철 노선을 물을 때 '몇 호선이에요?'가 가장 자연스러워요.",
+      "feedback_wrong": "[조사 오류] '몇 호선으로예요'는 조사가 어색해요. 노선을 물을 때는 '몇 호선이에요?'라고 말해요.\n[어휘 혼동] '출구'는 역 밖으로 나가는 문 번호예요. 지금은 지하철 노선을 묻는 상황이라 '몇 호선'을 써야 해요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 1 - Particle Error] '몇 호선으로예요' sounds unnatural. When asking which subway line it is, say '몇 호선이에요?'.",
+        "C": "Almost! [Type 5 - Vocabulary Confusion] '출구' means exit. Here, you are asking about the subway line, so you should use '몇 호선'."
+      },
+      "vocab_point": {
+        "expression": "몇 호선이에요?",
+        "meaning": "Which subway line is it?",
+        "real_tip": "한국 지하철에서는 '2호선', '4호선'처럼 말해요. 영어식으로 '몇 라인'보다 '몇 호선'이 훨씬 자연스러워요."
+      },
+      "next_scene_correct": "SUBWAY_001_03",
+      "next_scene_wrong": "hint_and_retry"
+    },
+    {
+      "scene_id": "SUBWAY_001_03",
+      "background": "환승 통로 앞, 화살표 표지판에 2호선 방향과 반대편 승강장 표시가 보인다.",
+      "npc_name": "역무원",
+      "npc_dialogue": "다음 역에서 2호선으로 환승하시면 돼요. 반대편 말고 이쪽 방향으로 가세요.",
+      "npc_dialogue_english": "Transfer to Line 2 at the next station. Don't go to the opposite side; go this way.",
+      "options": [
+        { "id": "A", "text": "2호선으로 환승하려면 이쪽으로 가면 돼요?", "text_english": "To transfer to Line 2, should I go this way?" },
+        { "id": "B", "text": "2호선에 환승하려면 이쪽으로 가면 돼요?", "text_english": "To transfer at Line 2, should I go this way?" },
+        { "id": "C", "text": "2호선으로 환승하려면 반대편으로 가면 돼요?", "text_english": "To transfer to Line 2, should I go to the opposite side?" }
+      ],
+      "correct_option": "A",
+      "hint": "환승할 노선을 말할 때 쓰는 조사와 방향 안내를 잘 확인해 보세요.",
+      "feedback_correct": "좋아요! 환승할 노선과 방향을 자연스럽게 다시 확인했어요.",
+      "feedback_wrong": "[조사 오류] '2호선에 환승'은 어색해요. 갈아탈 노선을 말할 때는 보통 '2호선으로 환승'이라고 해요.\n[어휘 혼동] '반대편'은 안내받은 방향과 반대예요. 지금은 역무원이 말한 '이쪽' 방향을 확인해야 해요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 1 - Particle Error] '2호선에 환승' sounds awkward. When talking about the line you transfer to, say '2호선으로 환승'.",
+        "C": "Almost! [Type 5 - Vocabulary Confusion] '반대편' means the opposite side. The station staff told you not to go that way, so '이쪽으로' is correct."
+      },
+      "vocab_point": {
+        "expression": "환승하다",
+        "meaning": "to transfer",
+        "real_tip": "지하철 안내 방송에서 '환승'이라는 말을 정말 자주 들어요. 일상 대화에서는 '갈아타다'도 많이 써요."
+      },
+      "next_scene_correct": "SUBWAY_001_04",
+      "next_scene_wrong": "hint_and_retry"
+    },
+    {
+      "scene_id": "SUBWAY_001_04",
+      "background": "목적지 역 출구 안내판 앞, 여러 출구 번호와 거리 이름이 표시되어 있다.",
+      "npc_name": "지나가는 시민",
+      "npc_dialogue": "어디 찾으세요? 출구 찾는 거면 제가 같이 봐드릴게요.",
+      "npc_dialogue_english": "Are you looking for somewhere? If you're looking for an exit, I can check with you.",
+      "options": [
+        { "id": "A", "text": "카페거리는 몇 번 출구로 나가요?", "text_english": "Which exit should I take for Cafe Street?" },
+        { "id": "B", "text": "카페거리는 몇 번 출구에 나가요?", "text_english": "At which exit do I go out for Cafe Street?" },
+        { "id": "C", "text": "카페거리는 몇 호선으로 나가요?", "text_english": "Which subway line should I take out for Cafe Street?" }
+      ],
+      "correct_option": "A",
+      "hint": "역 밖으로 나갈 때는 출구 번호와 방향을 함께 말해요.",
+      "feedback_correct": "맞아요! 목적지 근처 출구를 물을 때 가장 자연스러운 표현이에요.",
+      "feedback_wrong": "[조사 오류] '출구에 나가요'는 조사가 어색해요. 밖으로 나가는 방향은 '출구로 나가요'가 자연스러워요.\n[어휘 혼동] '호선'은 지하철 노선이고, 지금은 역 밖으로 나가는 문 번호를 묻는 상황이라 '몇 번 출구'를 써야 해요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 1 - Particle Error] '출구에 나가요' sounds unnatural. When talking about going out through an exit, say '출구로 나가요'.",
+        "C": "Almost! [Type 5 - Vocabulary Confusion] '호선' means subway line. Here, you are asking for the exit number, so '몇 번 출구' is correct."
+      },
+      "vocab_point": {
+        "expression": "몇 번 출구",
+        "meaning": "which exit number",
+        "real_tip": "한국에서는 길 안내를 할 때 '3번 출구로 나오세요'처럼 출구 번호를 기준으로 말하는 경우가 많아요."
+      },
+      "next_scene_correct": "SUBWAY_001_05",
+      "next_scene_wrong": "hint_and_retry"
+    },
+    {
+      "scene_id": "SUBWAY_001_05",
+      "background": "지하철역 3번 출구 밖, 횡단보도와 카페 간판이 보이고 목적지가 가까이 있다.",
+      "npc_name": "지나가는 시민",
+      "npc_dialogue": "3번 출구로 나오셨으면 맞아요. 저기 카페 보이시죠? 거기가 찾으시는 곳이에요.",
+      "npc_dialogue_english": "If you came out of Exit 3, you're in the right place. Do you see that cafe? That's the place you're looking for.",
+      "options": [
+        { "id": "A", "text": "네, 여기 맞아요. 감사합니다.", "text_english": "Yes, this is the right place. Thank you." },
+        { "id": "B", "text": "네, 여기에 맞아요. 감사합니다.", "text_english": "Yes, it fits here. Thank you." },
+        { "id": "C", "text": "네, 여기 맞으세요. 감사합니다.", "text_english": "Yes, this place is right, honorific. Thank you." }
+      ],
+      "correct_option": "A",
+      "hint": "장소가 맞는지 말할 때는 짧게 '여기 맞아요'라고 해요. 사물이나 장소에 높임 표현을 붙이지 않아요.",
+      "feedback_correct": "좋아요! 목적지에 도착한 뒤 자연스럽게 확인하고 감사 인사까지 했어요.",
+      "feedback_wrong": "[조사 오류] '여기에 맞아요'는 조사가 어색해요. 찾는 장소가 맞다는 뜻으로는 '여기 맞아요'가 자연스러워요.\n[높임법 오류] '맞으세요'는 사람을 높일 때 쓰는 표현이에요. 장소에는 높임을 붙이지 않고 '맞아요'라고 해요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 1 - Particle Error] '여기에 맞아요' sounds unnatural here. To say this is the right place, use '여기 맞아요'.",
+        "C": "Almost! [Type 4 - Honorific Error] '맞으세요' is an honorific form used for people. For a place, use '맞아요'."
+      },
+      "vocab_point": {
+        "expression": "여기 맞아요",
+        "meaning": "This is the right place.",
+        "real_tip": "길을 찾은 뒤 확인할 때 '여기 맞아요?' 또는 '여기 맞죠?'라고 많이 말해요. 상대가 알려줬다면 '감사합니다'까지 붙이면 좋아요."
+      },
+      "next_scene_correct": "end",
+      "next_scene_wrong": "hint_and_retry"
     }
   ]
 }

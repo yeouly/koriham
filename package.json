@@ -1,0 +1,12 @@
+{
+  "name": "koriham",
+  "version": "0.1.0",
+  "description": "한국 생활 시뮬레이션 한국어 학습 앱",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

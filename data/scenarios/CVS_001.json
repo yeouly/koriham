@@ -1,78 +1,143 @@
 {
-  "id": "CVS_001",
-  "title": "편의점에서 계산하기",
-  "titleEn": "Paying at a Convenience Store",
-  "location": "편의점",
-  "locationKey": "cvs",
-  "level": "A1",
-  "theme": "shopping",
-  "rewardCardId": "card_cvs_001",
-  "background": "assets/images/backgrounds/cvs_interior.png",
-  "npc": {
-    "id": "cashier_01",
-    "name": "알바생",
-    "nameEn": "Cashier",
-    "emoji": "🧑‍💼",
-    "image": "assets/images/npc/cashier_01.png"
-  },
-  "steps": [
+  "scenario_id": "CVS_001",
+  "scenario_title": "편의점에서 물건 사고 결제하기",
+  "situation": "편의점에서 원하는 물건을 직접 고르고 계산대에서 자연스럽게 결제한다.",
+  "difficulty": "A1-A2",
+  "scenes": [
     {
-      "id": "step_01",
-      "type": "dialogue",
-      "speaker": "알바생",
-      "text": "어서오세요~! 😊",
-      "audio": "assets/audio/voices/CVS_001/step_01.mp3",
-      "vocab": [
-        { "word": "어서오세요", "romanization": "eoseo oseyo", "meaning": "Welcome! (greeting customers)" }
-      ]
+      "scene_id": "CVS_001_01",
+      "background": "밤의 밝은 편의점 입구, 자동문이 열리고 계산대에 알바생이 보인다.",
+      "npc_name": "편의점 알바생",
+      "npc_dialogue": "어서 오세요~ 뭐 찾으시는 거 있으세요?",
+      "npc_dialogue_english": "Welcome~ Are you looking for something?",
+      "options": [
+        { "id": "A", "text": "네, 물 어디 있어요?", "text_english": "Yes, where is the water?" },
+        { "id": "B", "text": "네, 물을 어디 있어요?", "text_english": "Yes, where is the water?" },
+        { "id": "C", "text": "네, 물품 어디 있어요?", "text_english": "Yes, where are the goods?" }
+      ],
+      "correct_option": "A",
+      "hint": "찾는 물건의 위치를 물어볼 때는 물건 이름 뒤에 '어디 있어요?'를 붙여요.",
+      "feedback_correct": "좋아요! 편의점에서 원하는 물건의 위치를 자연스럽게 물어봤어요.",
+      "feedback_wrong": "[조사 오류] '물을'은 어색해요. '있다'와 함께 위치를 물을 때는 목적격 조사 '-을/를'을 쓰지 않아요.\n[어휘 혼동] '물품'은 '상품/물건'이라는 뜻이라서 마실 물을 찾는 상황에는 맞지 않아요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 1 - Particle Error] '물을' sounds unnatural here. When asking where something is, you usually don't use the object particle '-을/를' with '있어요'.",
+        "C": "Almost! [Type 5 - Vocabulary Confusion] '물품' means goods or items, not drinking water. In this situation, '물' is the natural word."
+      },
+      "vocab_point": {
+        "expression": "어디 있어요?",
+        "meaning": "Where is it?",
+        "real_tip": "편의점에서 물, 우산, 충전기 등을 찾을 때 'OO 어디 있어요?'라고 하면 가장 자연스러워요."
+      },
+      "next_scene_correct": "CVS_001_02",
+      "next_scene_wrong": "hint_and_retry"
     },
     {
-      "id": "step_02",
-      "type": "choice",
-      "speaker": "알바생",
-      "text": "봉투 필요하세요?",
-      "audio": "assets/audio/voices/CVS_001/step_02.mp3",
-      "vocab": [
-        { "word": "봉투", "romanization": "bongtu", "meaning": "bag / envelope" },
-        { "word": "필요하세요", "romanization": "piryohaseyo", "meaning": "Do you need...? (polite)" }
+      "scene_id": "CVS_001_02",
+      "background": "냉장고 앞에 여러 생수와 음료수가 진열되어 있고 손님이 직접 생수를 고른다.",
+      "npc_name": "편의점 알바생",
+      "npc_dialogue": "생수는 저쪽 냉장고 아래 칸에 있어요. 고르신 다음 계산대로 가져오시면 돼요~",
+      "npc_dialogue_english": "Bottled water is on the lower shelf in that fridge. After you choose one, just bring it to the counter.",
+      "options": [
+        { "id": "A", "text": "네, 이거 하나 살게요.", "text_english": "Okay, I'll buy this one." },
+        { "id": "B", "text": "네, 이거 하나 샀어요.", "text_english": "Okay, I bought this one." },
+        { "id": "C", "text": "네, 이거 하나 갖고 싶어요.", "text_english": "Okay, I want to have this one." }
       ],
-      "choices": [
-        { "id": "c1", "text": "네, 주세요.", "isCorrect": true,
-          "feedback": "맞아요! '주세요' is the most natural way to ask for something.",
-          "feedbackKo": "정확해요! 편의점에서 자주 쓰는 표현이에요." },
-        { "id": "c2", "text": "봉투 있어요?", "isCorrect": false,
-          "feedback": "This means 'Do you have a bag?' — sounds like you're asking, not requesting.",
-          "feedbackKo": "이 표현은 봉투가 있는지 묻는 뜻이에요." },
-        { "id": "c3", "text": "아니요, 괜찮아요.", "isCorrect": false,
-          "feedback": "This means 'No, it's okay.' — correct if you don't want a bag!",
-          "feedbackKo": "봉투가 필요 없을 때는 이렇게 말해요." }
-      ]
+      "correct_option": "A",
+      "hint": "아직 계산 전이에요. 지금은 고른 물건을 사겠다고 말하는 상황이에요.",
+      "feedback_correct": "맞아요! 한국 편의점에서는 물건을 직접 고른 뒤 '이거 하나 살게요'라고 말하면 자연스러워요.",
+      "feedback_wrong": "[시제 오류] '샀어요'는 이미 산 뒤에 쓰는 과거 표현이에요. 아직 계산 전이므로 '살게요'가 자연스러워요.\n[직역 오류] '갖고 싶어요'는 영어 'I want to have this'를 직역한 느낌이라 구매 상황에서는 어색해요. 편의점에서는 '살게요'가 자연스러워요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 2 - Tense Error] '샀어요' means you already bought it. You are still before payment, so '살게요' is more natural.",
+        "C": "Almost! [Type 6 - Direct Translation Error] '갖고 싶어요' sounds like a direct translation of 'I want to have this.' In a convenience store, '살게요' sounds much more natural."
+      },
+      "vocab_point": {
+        "expression": "이거 하나 살게요",
+        "meaning": "I'll buy this one.",
+        "real_tip": "편의점에서는 손님이 물건을 직접 들고 계산대로 가요. 계산대에서 '이거 하나 살게요'라고 하면 자연스러워요."
+      },
+      "next_scene_correct": "CVS_001_03",
+      "next_scene_wrong": "hint_and_retry"
     },
     {
-      "id": "step_03",
-      "type": "speech",
-      "speaker": "알바생",
-      "text": "2,000원입니다.",
-      "audio": "assets/audio/voices/CVS_001/step_03.mp3",
-      "vocab": [
-        { "word": "원", "romanization": "won", "meaning": "Korean currency (KRW)" },
-        { "word": "입니다", "romanization": "imnida", "meaning": "It is... (formal ending)" }
+      "scene_id": "CVS_001_03",
+      "background": "손님이 생수와 김밥을 들고 계산대 앞에 서 있다.",
+      "npc_name": "편의점 알바생",
+      "npc_dialogue": "계산 도와드릴게요~ 이거 두 개 맞으세요?",
+      "npc_dialogue_english": "I'll ring these up for you~ Are these two items correct?",
+      "options": [
+        { "id": "A", "text": "네, 맞아요. 카드로 할게요.", "text_english": "Yes, that's right. I'll pay by card." },
+        { "id": "B", "text": "네, 맞아요. 카드를 할게요.", "text_english": "Yes, that's right. I'll do a card." },
+        { "id": "C", "text": "네, 맞아요. 카드로 했어요.", "text_english": "Yes, that's right. I paid by card." }
       ],
-      "prompt": "이천 원이에요.",
-      "promptRomanization": "icheon won-ieyo",
-      "instruction": "Try saying: '이천 원이에요.' 🎙️"
+      "correct_option": "A",
+      "hint": "결제 수단을 말할 때는 '카드' 뒤에 수단을 나타내는 말을 붙여요.",
+      "feedback_correct": "좋아요! '카드로 할게요'는 계산할 때 가장 자연스러운 표현이에요.",
+      "feedback_wrong": "[조사 오류] '카드를'은 틀렸어요. 결제 수단을 나타낼 때는 '카드로'처럼 '-로'를 써요.\n[시제 오류] '했어요'는 이미 결제한 뒤에 쓰는 말이에요. 지금은 결제 방법을 말하는 상황이에요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 1 - Particle Error] '카드를 할게요' is incorrect here. When talking about a payment method, use '-로': '카드로 할게요'.",
+        "C": "Almost! [Type 2 - Tense Error] '했어요' means you already paid. Right now, you are choosing how to pay, so '할게요' is natural."
+      },
+      "vocab_point": {
+        "expression": "카드로 할게요",
+        "meaning": "I'll pay by card.",
+        "real_tip": "현금이면 '현금으로 할게요', 카드면 '카드로 할게요'라고 하면 돼요."
+      },
+      "next_scene_correct": "CVS_001_04",
+      "next_scene_wrong": "hint_and_retry"
     },
     {
-      "id": "step_04",
-      "type": "dialogue",
-      "speaker": "알바생",
-      "text": "감사합니다~ 또 오세요! 👋",
-      "audio": "assets/audio/voices/CVS_001/step_04.mp3",
-      "vocab": [
-        { "word": "감사합니다", "romanization": "gamsahamnida", "meaning": "Thank you (formal)" },
-        { "word": "또 오세요", "romanization": "ddo oseyo", "meaning": "Please come again" }
+      "scene_id": "CVS_001_04",
+      "background": "계산대 위에 카드 단말기와 작은 비닐봉투가 놓여 있다.",
+      "npc_name": "편의점 알바생",
+      "npc_dialogue": "봉투 필요하세요? 영수증은 드릴까요?",
+      "npc_dialogue_english": "Do you need a bag? Would you like a receipt?",
+      "options": [
+        { "id": "A", "text": "봉투는 괜찮아요. 영수증은 주세요.", "text_english": "I don't need a bag. Please give me the receipt." },
+        { "id": "B", "text": "봉투가 괜찮아요. 영수증은 주세요.", "text_english": "The bag is okay. Please give me the receipt." },
+        { "id": "C", "text": "봉투는 괜찮아요. 영수증은 줘요.", "text_english": "I don't need a bag. Give me the receipt." }
       ],
-      "isEnd": true
+      "correct_option": "A",
+      "hint": "필요 없는 것과 필요한 것을 나눠 말할 때는 주제를 표시하는 표현을 생각해 보세요.",
+      "feedback_correct": "정답이에요! 필요한 것과 필요 없는 것을 정중하고 자연스럽게 말했어요.",
+      "feedback_wrong": "[조사 오류] '봉투가 괜찮아요'는 봉투 자체가 괜찮다는 뜻처럼 들려요. 거절할 때는 '봉투는 괜찮아요'가 자연스러워요.\n[어미 오류] '줘요'는 직원에게 말할 때 조금 직접적으로 들릴 수 있어요. 요청할 때는 '주세요'가 더 공손해요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 1 - Particle Error] '봉투가 괜찮아요' sounds like you are saying the bag itself is okay. To politely refuse the bag, say '봉투는 괜찮아요'.",
+        "C": "Almost! [Type 3 - Ending Error] '줘요' can sound too direct when speaking to a store clerk. '주세요' is more polite and natural."
+      },
+      "vocab_point": {
+        "expression": "괜찮아요",
+        "meaning": "It's okay / No, thank you.",
+        "real_tip": "'필요 없어요'보다 '괜찮아요'가 더 부드럽게 들려요. 봉투 거절할 때 자주 써요."
+      },
+      "next_scene_correct": "CVS_001_05",
+      "next_scene_wrong": "hint_and_retry"
+    },
+    {
+      "scene_id": "CVS_001_05",
+      "background": "손님이 물건을 들고 편의점 출구로 향하고 알바생이 인사한다.",
+      "npc_name": "편의점 알바생",
+      "npc_dialogue": "결제 완료됐습니다~ 좋은 하루 보내세요!",
+      "npc_dialogue_english": "Payment is complete~ Have a nice day!",
+      "options": [
+        { "id": "A", "text": "감사합니다. 수고하세요.", "text_english": "Thank you. Have a good one." },
+        { "id": "B", "text": "감사합니다. 수고해요.", "text_english": "Thank you. Good work." },
+        { "id": "C", "text": "감사합니다. 고생하세요.", "text_english": "Thank you. Keep struggling." }
+      ],
+      "correct_option": "A",
+      "hint": "처음 보는 직원에게는 너무 친한 말투나 부정적으로 들릴 수 있는 표현을 피하는 게 좋아요.",
+      "feedback_correct": "좋아요! 편의점에서 나갈 때 아주 자연스러운 마무리 인사예요.",
+      "feedback_wrong": "[어미 오류] '수고해요'는 틀린 말은 아니지만 처음 보는 직원에게는 조금 가볍게 들릴 수 있어요. '수고하세요'가 더 자연스러워요.\n[어휘 혼동] '고생하세요'는 계속 힘들라는 느낌으로 들릴 수 있어요. 가게를 나갈 때는 '수고하세요'가 더 좋아요.",
+      "wrong_feedback_english": {
+        "B": "Almost! [Type 3 - Ending Error] '수고해요' is understandable, but it can sound a bit too casual to a store clerk you don't know. '수고하세요' is more natural.",
+        "C": "Almost! [Type 5 - Vocabulary Confusion] '고생하세요' can sound like you are telling the person to keep having a hard time. When leaving a store, '수고하세요' is better."
+      },
+      "vocab_point": {
+        "expression": "수고하세요",
+        "meaning": "Have a good one / Thank you for your work.",
+        "real_tip": "가게나 편의점을 나갈 때 '감사합니다, 수고하세요'라고 하면 자연스럽고 예의 있어요."
+      },
+      "next_scene_correct": "end",
+      "next_scene_wrong": "hint_and_retry"
     }
   ]
 }

@@ -1,34 +1,45 @@
 /**
- * SpeechRecognition — wraps Web Speech API for Korean pronunciation practice.
- * Compares user's spoken text against a target string.
+ * KoriSpeech — Korean pronunciation practice via Web Speech API.
  */
 
 export class KoriSpeech {
   constructor({ onResult, onError } = {}) {
-    this.onResult = onResult || (() => {});
-    this.onError  = onError  || (() => {});
-    this._recognition = null;
-    this._isListening = false;
+    this.onResult      = onResult || (() => {});
+    this.onError       = onError  || (() => {});
+    this._recognition  = null;
+    this._isListening  = false;
 
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      console.warn('[SpeechRecognition] Web Speech API not supported in this browser.');
+    const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechAPI) {
+      console.warn('[KoriSpeech] Web Speech API not available.');
       return;
     }
 
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-    this._recognition = new SpeechRecognitionAPI();
-    this._recognition.lang = 'ko-KR';
-    this._recognition.interimResults = false;
-    this._recognition.maxAlternatives = 3;
+    this._recognition = new SpeechAPI();
+    this._recognition.lang             = 'ko-KR';
+    this._recognition.interimResults   = false;
+    this._recognition.maxAlternatives  = 3;
+    this._recognition.continuous       = false;
 
     this._recognition.onresult = (e) => {
+      this._isListening = false;
       const transcript = e.results[0][0].transcript.trim();
       this.onResult(transcript);
     };
 
     this._recognition.onerror = (e) => {
-      this.onError(e.error);
       this._isListening = false;
+      console.warn('[KoriSpeech] Error:', e.error);
+      // not-allowed = microphone denied; no-speech = silence
+      if (e.error === 'not-allowed') {
+        this.onError('마이크 사용 권한이 필요해요.');
+      } else if (e.error === 'no-speech') {
+        this.onError('목소리가 들리지 않아요. 다시 해볼까요?');
+      } else if (e.error === 'network') {
+        this.onError('인터넷 연결이 필요해요. (음성 인식은 온라인에서 동작해요)');
+      } else {
+        this.onError(`인식 오류: ${e.error}`);
+      }
     };
 
     this._recognition.onend = () => {
@@ -36,37 +47,37 @@ export class KoriSpeech {
     };
   }
 
-  get isSupported() {
-    return this._recognition !== null;
-  }
+  get isSupported() { return this._recognition !== null; }
+  get isListening()  { return this._isListening; }
 
-  /** Start listening. */
   start() {
     if (!this._recognition || this._isListening) return;
     this._isListening = true;
-    this._recognition.start();
+    try {
+      this._recognition.start();
+    } catch (e) {
+      this._isListening = false;
+      console.warn('[KoriSpeech] start() failed:', e);
+    }
   }
 
-  /** Stop listening. */
   stop() {
     if (!this._recognition || !this._isListening) return;
-    this._recognition.stop();
+    try { this._recognition.stop(); } catch (_) {}
     this._isListening = false;
   }
 
-  /**
-   * Compare user's transcript to target string.
-   * Returns a score 0–100 based on character overlap.
-   */
+  /** Score 0–100 based on character-level overlap. */
   static compare(spoken, target) {
-    const normalize = str => str.replace(/\s/g, '').toLowerCase();
-    const a = normalize(spoken);
-    const b = normalize(target);
-    if (a === b) return 100;
+    const norm = s => s.replace(/[\s.,!?~]/g, '').toLowerCase();
+    const a = norm(spoken);
+    const b = norm(target);
+    if (!a || !b) return 0;
+    if (a === b)  return 100;
 
     let matches = 0;
-    for (const char of a) {
-      if (b.includes(char)) matches++;
+    for (const ch of a) {
+      if (b.includes(ch)) matches++;
     }
     return Math.round((matches / Math.max(a.length, b.length)) * 100);
   }

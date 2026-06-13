@@ -3,115 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>코리햄 KoriHam — 한국어 생활 시뮬레이션</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Nanum+Round+Square:wght@400;700&display=swap" rel="stylesheet" />
+  <title>코리햄</title>
+  <link rel="stylesheet" href="styles/fonts.css" />
   <link rel="stylesheet" href="styles/global.css" />
-  <link rel="stylesheet" href="styles/map.css" />
+  <link rel="stylesheet" href="styles/home.css" />
   <link rel="stylesheet" href="styles/game.css" />
   <link rel="stylesheet" href="styles/cards.css" />
-  <link rel="stylesheet" href="styles/badges.css" />
+  <link rel="stylesheet" href="styles/mypage.css" />
 </head>
 <body>
 
-  <!-- ===== TITLE SCREEN ===== -->
-  <div id="screen-title" class="screen active">
-    <div class="title-bg"></div>
-    <div class="title-content">
-      <div class="title-logo">
-        <div class="character-placeholder">🐹</div>
-        <h1 class="title-text">코리햄</h1>
-        <p class="title-sub">KoriHam</p>
-        <p class="title-desc">한국 생활을 체험하며 한국어를 배워요!</p>
-      </div>
-      <div class="title-buttons">
-        <button class="btn btn-primary" id="btn-start">게임 시작</button>
-        <button class="btn btn-secondary" id="btn-collection">표현 카드</button>
-        <button class="btn btn-secondary" id="btn-badges">생존 뱃지</button>
-      </div>
-      <p class="title-version">v0.1.0</p>
-    </div>
+  <!-- ===== SPLASH ===== -->
+  <div id="screen-splash">
+    <img src="assets/images/splash.jpeg" class="splash-bg" alt="">
   </div>
 
-  <!-- ===== MAP SCREEN ===== -->
-  <div id="screen-map" class="screen">
-    <div class="map-header">
-      <h2>우리 동네</h2>
-      <div class="map-header-right">
-        <button class="btn btn-icon" id="btn-map-cards" title="표현 카드">📖</button>
-        <button class="btn btn-icon" id="btn-map-badges" title="생존 뱃지">🏅</button>
-        <button class="btn btn-icon" id="btn-map-home" title="타이틀로">🏠</button>
+  <!-- ===== HOME ===== -->
+  <div id="screen-home" class="screen active">
+    <div class="home-header">
+      <img src="assets/images/logo.png" class="home-logo-img" alt="코리햄">
+      <button class="btn-bell">
+        <img src="assets/images/icon_bell.png" class="btn-bell-icon" alt="">
+        <span class="bell-badge"></span>
+      </button>
+    </div>
+
+    <div class="home-scroll">
+      <div class="home-hero">
+        <div class="home-hero-text">
+          <div class="hero-label">오늘의 한국어 미션</div>
+          <div class="hero-title">코리햄과<br>함께 배워요</div>
+        </div>
+        <video class="home-hero-video" autoplay loop muted playsinline>
+          <source src="assets/video/koriham_walk.mp4" type="video/mp4">
+        </video>
+        <button class="btn-hero-start" id="btn-hero-start">
+          <span class="hero-play-icon"></span>
+          시작하기
+        </button>
       </div>
+
+      <div class="home-section-label">미션 선택</div>
+      <div class="home-missions" id="home-missions"></div>
     </div>
-    <div class="map-container" id="map-container">
-      <!-- Buildings rendered by MapScreen.js -->
-    </div>
-    <div class="map-hint">건물을 눌러 한국어 미션을 시작하세요!</div>
   </div>
 
   <!-- ===== GAME SCREEN ===== -->
   <div id="screen-game" class="screen">
-    <div class="game-header">
-      <button class="btn btn-icon" id="btn-game-back" title="지도로">←</button>
+    <div id="game-scene-wrap"></div>
+
+    <div class="game-header" id="game-header">
+      <button class="btn-game-icon" id="btn-game-back">뒤로</button>
       <div class="game-scenario-title" id="game-scenario-title">—</div>
       <div class="game-progress" id="game-progress">0 / 0</div>
     </div>
 
-    <div class="game-scene">
-      <div class="scene-bg" id="scene-bg"></div>
-      <div class="scene-npc" id="scene-npc"></div>
-      <div class="scene-character">🐹</div>
-    </div>
-
-    <div class="dialogue-box" id="dialogue-box">
-      <div class="dialogue-speaker" id="dialogue-speaker"></div>
-      <div class="dialogue-text" id="dialogue-text">…</div>
-    </div>
-
-    <div class="choices-container" id="choices-container">
-      <!-- Choice buttons injected by ChoiceHandler.js -->
-    </div>
-
-    <div class="speech-panel" id="speech-panel" style="display:none;">
-      <button class="btn btn-speech" id="btn-speech">🎙️ 발음해보기</button>
-      <div class="speech-result" id="speech-result"></div>
+    <div class="game-bottom" id="game-bottom">
+      <div class="speech-bubble">
+        <div class="bubble-speaker" id="dialogue-speaker">코리햄</div>
+        <div class="bubble-text" id="dialogue-text">…</div>
+        <div class="bubble-english" id="dialogue-english"></div>
+      </div>
+      <div class="choices-container" id="choices-container"></div>
     </div>
 
     <div class="feedback-overlay" id="feedback-overlay" style="display:none;">
-      <div class="feedback-content" id="feedback-content"></div>
-      <button class="btn btn-primary" id="btn-feedback-next">다음 →</button>
+      <div class="feedback-inner">
+        <div class="feedback-result-bar"></div>
+        <div class="feedback-content" id="feedback-content"></div>
+        <div class="feedback-actions" id="feedback-actions"></div>
+      </div>
     </div>
   </div>
 
   <!-- ===== RESULT SCREEN ===== -->
   <div id="screen-result" class="screen">
-    <div class="result-content" id="result-content">
-      <!-- Rendered by ResultScreen.js -->
+    <div class="result-wrap">
+      <div class="result-content" id="result-content"></div>
     </div>
   </div>
 
-  <!-- ===== CARD BOOK SCREEN ===== -->
+  <!-- ===== CARD BOOK ===== -->
   <div id="screen-cards" class="screen">
     <div class="screen-header">
-      <button class="btn btn-icon" id="btn-cards-back">←</button>
-      <h2>표현 카드 📖</h2>
+      <img src="assets/images/logo.png" class="screen-logo-img" alt="코리햄">
+      <button class="btn-bell">
+        <img src="assets/images/icon_bell.png" class="btn-bell-icon" alt="">
+        <span class="bell-badge"></span>
+      </button>
     </div>
-    <div class="cards-grid" id="cards-grid">
-      <!-- Rendered by CardBook.js -->
+    <div class="cards-tabs">
+      <button class="tab-btn active" data-type="word">단어</button>
+      <button class="tab-btn" data-type="phrase">숙어</button>
+    </div>
+    <div class="cards-body" id="cards-body"></div>
+  </div>
+
+  <!-- ===== MY PAGE ===== -->
+  <div id="screen-mypage" class="screen">
+    <div class="screen-header">
+      <img src="assets/images/logo.png" class="screen-logo-img" alt="코리햄">
+      <button class="btn-bell">
+        <img src="assets/images/icon_bell.png" class="btn-bell-icon" alt="">
+        <span class="bell-badge"></span>
+      </button>
+    </div>
+    <div class="mypage-scroll">
+      <div id="mypage-content"></div>
     </div>
   </div>
 
-  <!-- ===== BADGE SCREEN ===== -->
-  <div id="screen-badges" class="screen">
-    <div class="screen-header">
-      <button class="btn btn-icon" id="btn-badges-back">←</button>
-      <h2>생존 뱃지 🏅</h2>
-    </div>
-    <div class="badges-grid" id="badges-grid">
-      <!-- Rendered by BadgeScreen.js -->
-    </div>
-  </div>
+  <!-- ===== GLOBAL BOTTOM NAV ===== -->
+  <nav class="global-bottom-nav" id="global-bottom-nav">
+    <button class="nav-item active" id="nav-home" data-screen="screen-home">
+      <img src="assets/images/icon_home.png" class="nav-icon-img" alt="">
+      <span class="nav-label">홈</span>
+    </button>
+    <button class="nav-item" id="nav-cards" data-screen="screen-cards">
+      <img src="assets/images/icon_cards.png" class="nav-icon-img" alt="">
+      <span class="nav-label">카드</span>
+    </button>
+    <button class="nav-item" id="nav-mypage" data-screen="screen-mypage">
+      <img src="assets/images/icon_mypage.png" class="nav-icon-img" alt="">
+      <span class="nav-label">마이페이지</span>
+    </button>
+  </nav>
+
+  <div class="motivational-toast" id="motivational-toast"></div>
 
   <!-- ===== SCRIPTS ===== -->
   <script type="module" src="src/system/AudioManager.js"></script>
@@ -122,10 +140,21 @@
   <script type="module" src="src/game/ChoiceHandler.js"></script>
   <script type="module" src="src/game/SpeechRecognition.js"></script>
   <script type="module" src="src/game/SceneManager.js"></script>
-  <script type="module" src="src/ui/MapScreen.js"></script>
+  <script type="module" src="src/ui/HomeScreen.js"></script>
   <script type="module" src="src/ui/GameScreen.js"></script>
   <script type="module" src="src/ui/ResultScreen.js"></script>
   <script type="module" src="src/ui/CardBook.js"></script>
-  <script type="module" src="src/ui/BadgeScreen.js"></script>
+  <script type="module" src="src/ui/MyPage.js"></script>
+
+  <script>
+    (function() {
+      var splash = document.getElementById('screen-splash');
+      if (!splash) return;
+      setTimeout(function() {
+        splash.classList.add('splash-out');
+        setTimeout(function() { splash.style.display = 'none'; }, 600);
+      }, 2500);
+    })();
+  </script>
 </body>
 </html>

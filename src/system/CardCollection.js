@@ -1,7 +1,3 @@
-/**
- * CardCollection — manages expression card unlock state.
- */
-
 import { ProgressManager } from './ProgressManager.js';
 
 let _allCards = null;
@@ -15,20 +11,18 @@ async function loadCardData() {
 }
 
 export const CardCollection = {
-  /** Get all cards with lock/unlock state merged in. */
   async getCards() {
     const cards = await loadCardData();
     const progress = ProgressManager.getAll();
 
     return cards.map(card => ({
       ...card,
-      unlocked: progress[card.scenarioId]?.cardEarned === true,
+      unlocked: (progress[card.scenarioId]?.clears || 0) >= 1,
     }));
   },
 
-  /** Unlock the card associated with a scenario. */
   async unlockForScenario(scenarioId) {
     ProgressManager.earnCard(scenarioId);
-    console.log(`[CardCollection] Card unlocked for scenario: ${scenarioId}`);
+    console.log(`[CardCollection] Cards unlocked for: ${scenarioId}`);
   },
 };
