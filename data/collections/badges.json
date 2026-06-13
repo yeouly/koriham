@@ -1,0 +1,45 @@
+{
+  "badges": [
+    {
+      "id": "badge_cvs_rookie",
+      "scenarioId": "CVS_001",
+      "icon": "🏪",
+      "name": "편의점 단골",
+      "nameEn": "CVS Regular",
+      "description": "편의점 미션을 3번 클리어하세요.",
+      "descriptionEn": "Clear the CVS mission 3 times.",
+      "requiredClears": 3
+    },
+    {
+      "id": "badge_subway_navigator",
+      "scenarioId": "SUBWAY_001",
+      "icon": "🚇",
+      "name": "지하철 마스터",
+      "nameEn": "Subway Master",
+      "description": "지하철 미션을 3번 클리어하세요.",
+      "descriptionEn": "Clear the subway mission 3 times.",
+      "requiredClears": 3
+    },
+    {
+      "id": "badge_restaurant_pro",
+      "scenarioId": "RESTAURANT_001",
+      "icon": "🍽️",
+      "name": "주문 달인",
+      "nameEn": "Order Pro",
+      "description": "식당 미션을 3번 클리어하세요.",
+      "descriptionEn": "Clear the restaurant mission 3 times.",
+      "requiredClears": 3
+    },
+    {
+      "id": "badge_all_clear",
+      "scenarioId": null,
+      "icon": "🌟",
+      "name": "한국 생활 시작!",
+      "nameEn": "Korean Life Starter",
+      "description": "모든 미션을 1번씩 클리어하세요.",
+      "descriptionEn": "Clear every mission at least once.",
+      "requiredClears": 1,
+      "requiresAll": true
+    }
+  ]
+}

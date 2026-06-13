@@ -1,0 +1,255 @@
+/* ===================================================
+   KoriHam — Game Screen Styles
+   =================================================== */
+
+/* ── Game Header ── */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-sm) var(--sp-md);
+  background: var(--color-surface);
+  border-bottom: 2px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.game-scenario-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.game-progress {
+  font-size: 0.85rem;
+  color: var(--color-text-sub);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--r-full);
+  padding: 2px 10px;
+}
+
+/* ── Scene Area ── */
+.game-scene {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.scene-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: #FFF0DC;
+}
+
+.scene-npc {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-30%);
+  font-size: 4rem;
+  filter: drop-shadow(0 4px 8px var(--color-shadow));
+  transition: transform var(--dur) var(--ease);
+}
+
+.scene-character {
+  position: absolute;
+  bottom: 20px;
+  right: 15%;
+  font-size: 3rem;
+  filter: drop-shadow(0 4px 8px var(--color-shadow));
+  animation: idle 3s ease-in-out infinite;
+}
+
+@keyframes idle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30%       { transform: translateY(-4px) rotate(-2deg); }
+  60%       { transform: translateY(-2px) rotate(1deg); }
+}
+
+/* ── Dialogue Box ── */
+.dialogue-box {
+  flex-shrink: 0;
+  margin: var(--sp-sm) var(--sp-md);
+  padding: var(--sp-md);
+  background: var(--color-surface);
+  border: 3px solid var(--color-border);
+  border-radius: var(--r-lg);
+  box-shadow: 0 4px 0 var(--color-border);
+  min-height: 80px;
+  position: relative;
+}
+
+.dialogue-box::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 32px;
+  width: 20px;
+  height: 14px;
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-border);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+.dialogue-speaker {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--sp-xs);
+}
+
+.dialogue-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+/* ── Choices ── */
+.choices-container {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  padding: 0 var(--sp-md) var(--sp-md);
+}
+
+.choice-btn {
+  width: 100%;
+  text-align: left;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color var(--dur) ease, transform var(--dur) var(--ease), background var(--dur) ease;
+  box-shadow: 0 3px 0 var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.choice-btn:hover {
+  border-color: var(--color-primary);
+  background: #FFF5EE;
+  transform: translateX(4px);
+}
+
+.choice-btn:active {
+  transform: translateX(2px) translateY(2px);
+  box-shadow: 0 1px 0 var(--color-border);
+}
+
+.choice-btn.correct {
+  border-color: var(--color-correct);
+  background: #EDFFF0;
+  box-shadow: 0 3px 0 #4DA855;
+}
+
+.choice-btn.wrong {
+  border-color: var(--color-wrong);
+  background: #FFF0F0;
+  box-shadow: 0 3px 0 #CC4444;
+}
+
+.choice-number {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-full);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Speech Panel ── */
+.speech-panel {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: var(--sp-sm) var(--sp-md);
+  background: #F0F8FF;
+  border-top: 1px solid #D0E8F8;
+}
+
+.btn-speech {
+  background: #5BA4D4;
+  color: white;
+  border-radius: var(--r-full);
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-weight: 700;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91,164,212,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(91,164,212,0); }
+}
+
+.btn-speech.listening {
+  background: var(--color-wrong);
+  animation: none;
+}
+
+.speech-result {
+  font-size: 0.85rem;
+  color: var(--color-text-sub);
+  flex: 1;
+}
+
+/* ── Feedback Overlay ── */
+.feedback-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,248,240,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-lg);
+  padding: var(--sp-xl);
+  z-index: 10;
+  backdrop-filter: blur(2px);
+}
+
+.feedback-content {
+  text-align: center;
+}
+
+.feedback-content .feedback-emoji {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: var(--sp-md);
+}
+
+.feedback-content .feedback-msg {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.feedback-content.correct .feedback-msg { color: var(--color-correct); }
+.feedback-content.wrong   .feedback-msg { color: var(--color-wrong); }
+
+.feedback-content .feedback-explanation {
+  margin-top: var(--sp-sm);
+  font-size: 0.95rem;
+  color: var(--color-text-sub);
+  line-height: 1.6;
+}

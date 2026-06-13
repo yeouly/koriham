@@ -1,0 +1,54 @@
+{
+  "id": "SUBWAY_001",
+  "title": "지하철 타기",
+  "titleEn": "Taking the Subway",
+  "location": "지하철역",
+  "locationKey": "subway",
+  "level": "A1",
+  "theme": "transport",
+  "rewardCardId": "card_subway_001",
+  "background": "assets/images/backgrounds/subway_station.png",
+  "npc": {
+    "id": "subway_officer",
+    "name": "역무원",
+    "nameEn": "Station Staff",
+    "emoji": "👷",
+    "image": "assets/images/npc/subway_officer.png"
+  },
+  "steps": [
+    {
+      "id": "step_01",
+      "type": "dialogue",
+      "speaker": "역무원",
+      "text": "어디 가세요?",
+      "audio": "assets/audio/voices/SUBWAY_001/step_01.mp3",
+      "vocab": [
+        { "word": "어디", "romanization": "eodi", "meaning": "where" },
+        { "word": "가세요", "romanization": "gaseyo", "meaning": "Are you going? (polite)" }
+      ]
+    },
+    {
+      "id": "step_02",
+      "type": "choice",
+      "speaker": "역무원",
+      "text": "티켓은 어디서 사요?",
+      "audio": "assets/audio/voices/SUBWAY_001/step_02.mp3",
+      "vocab": [
+        { "word": "티켓", "romanization": "tiket", "meaning": "ticket" },
+        { "word": "어디서", "romanization": "eodiseo", "meaning": "where (from)" },
+        { "word": "사요", "romanization": "sayo", "meaning": "buy (polite informal)" }
+      ],
+      "choices": [
+        { "id": "c1", "text": "저기 자동발매기에서 사요.", "isCorrect": true,
+          "feedback": "Perfect! '저기' (over there) + '자동발매기' (ticket machine) = natural answer.",
+          "feedbackKo": "자동발매기에서 사는 게 맞아요!" },
+        { "id": "c2", "text": "버스에서 사요.", "isCorrect": false,
+          "feedback": "'버스' means bus — wrong location for subway tickets!",
+          "feedbackKo": "버스는 지하철이 아니에요 😅" },
+        { "id": "c3", "text": "모르겠어요.", "isCorrect": false,
+          "feedback": "This means 'I don't know.' — grammatically fine but not helpful!",
+          "feedbackKo": "문법은 맞지만 조금 더 알아볼까요?" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "RESTAURANT_001",
+  "title": "식당에서 주문하기",
+  "titleEn": "Ordering at a Restaurant",
+  "location": "식당",
+  "locationKey": "restaurant",
+  "level": "A2",
+  "theme": "food",
+  "rewardCardId": "card_restaurant_001",
+  "background": "assets/images/backgrounds/restaurant_interior.png",
+  "npc": {
+    "id": "waiter_01",
+    "name": "직원",
+    "nameEn": "Staff",
+    "emoji": "🧑‍🍳",
+    "image": "assets/images/npc/waiter_01.png"
+  },
+  "steps": [
+    {
+      "id": "step_01",
+      "type": "dialogue",
+      "speaker": "직원",
+      "text": "몇 분이세요?",
+      "audio": "assets/audio/voices/RESTAURANT_001/step_01.mp3",
+      "vocab": [
+        { "word": "몇 분", "romanization": "myeot bun", "meaning": "how many people (honorific counter)" },
+        { "word": "이세요", "romanization": "iseyo", "meaning": "are you? (polite)" }
+      ]
+    },
+    {
+      "id": "step_02",
+      "type": "choice",
+      "speaker": "직원",
+      "text": "뭐 드시겠어요?",
+      "audio": "assets/audio/voices/RESTAURANT_001/step_02.mp3",
+      "vocab": [
+        { "word": "뭐", "romanization": "mwo", "meaning": "what" },
+        { "word": "드시겠어요", "romanization": "deusigesseoyo", "meaning": "Would you like to eat? (honorific)" }
+      ],
+      "choices": [
+        { "id": "c1", "text": "비빔밥 하나 주세요.", "isCorrect": true,
+          "feedback": "Natural order! '[dish] + [counter] + 주세요' is the standard restaurant ordering pattern.",
+          "feedbackKo": "식당에서 가장 많이 쓰는 주문 패턴이에요!" },
+        { "id": "c2", "text": "비빔밥 먹고 싶어요.", "isCorrect": false,
+          "feedback": "Grammatically correct but sounds more like expressing a wish, not placing an order.",
+          "feedbackKo": "문법은 맞지만 실제 주문할 때는 '주세요'가 더 자연스러워요." },
+        { "id": "c3", "text": "비빔밥이요.", "isCorrect": false,
+          "feedback": "This works in casual settings! But '하나 주세요' is more complete.",
+          "feedbackKo": "짧게 말할 때 쓸 수 있지만 '하나 주세요'가 더 정중해요." }
+      ]
+    }
+  ]
+}

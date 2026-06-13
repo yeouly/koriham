@@ -1,0 +1,122 @@
+/* ===================================================
+   KoriHam — Map Screen Styles
+   =================================================== */
+
+/* ── Map Header ── */
+.map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-md) var(--sp-lg);
+  background: var(--color-surface);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.map-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-text);
+}
+
+.map-header-right {
+  display: flex;
+  gap: var(--sp-sm);
+}
+
+/* ── Map Container ── */
+.map-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 30% 70%, #D4EAD0 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, #FFF0D4 0%, transparent 50%),
+    linear-gradient(180deg, #EAF4E8 0%, #FFF8F0 100%);
+}
+
+/* ── Map Hint ── */
+.map-hint {
+  padding: var(--sp-sm) var(--sp-lg);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-sub);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ── Building Card ── */
+.map-building {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-xs);
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease);
+}
+
+.map-building:hover {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.map-building:active {
+  transform: scale(0.97);
+}
+
+.building-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--r-md);
+  border: 3px solid var(--color-border);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 4px 0 var(--color-border), 0 6px 16px var(--color-shadow);
+  position: relative;
+  transition: border-color var(--dur) ease, box-shadow var(--dur) ease;
+}
+
+.map-building.cleared .building-icon {
+  border-color: var(--color-building-clear);
+  box-shadow: 0 4px 0 #E0AA00, 0 6px 16px var(--color-shadow);
+  background: #FFFBEB;
+}
+
+.map-building.locked .building-icon {
+  background: #F0EBE6;
+  opacity: 0.7;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+
+/* Window light effect when cleared */
+.map-building.cleared .building-icon::after {
+  content: '✨';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 0.9rem;
+}
+
+.building-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--r-full);
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+
+.building-status {
+  font-size: 0.72rem;
+  color: var(--color-text-sub);
+}
+
+.map-building.cleared .building-status {
+  color: #C89A00;
+  font-weight: 700;
+}

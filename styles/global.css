@@ -1,0 +1,241 @@
+/* ===================================================
+   KoriHam — Global Styles
+   =================================================== */
+
+/* ── CSS Variables ── */
+:root {
+  /* Colors */
+  --color-bg:       #FFF8F0;
+  --color-surface:  #FFFFFF;
+  --color-primary:  #FF8C42;   /* warm orange */
+  --color-primary-light: #FFBE8A;
+  --color-secondary: #F9C6C9;  /* soft pink */
+  --color-accent:   #6DC8B8;   /* mint */
+  --color-text:     #4A3728;
+  --color-text-sub: #8A7060;
+  --color-border:   #E8D5C4;
+  --color-shadow:   rgba(74, 55, 40, 0.12);
+
+  /* Building states */
+  --color-building-locked: #C8BAB0;
+  --color-building-clear:  #FFD166;
+
+  /* Feedback */
+  --color-correct:  #6BCB77;
+  --color-wrong:    #FF6B6B;
+
+  /* Spacing */
+  --sp-xs: 4px;
+  --sp-sm: 8px;
+  --sp-md: 16px;
+  --sp-lg: 24px;
+  --sp-xl: 40px;
+
+  /* Border radius */
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-full: 9999px;
+
+  /* Typography */
+  --font-main: 'Nanum Round Square', 'Gaegu', sans-serif;
+  --font-display: 'Gaegu', sans-serif;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur: 250ms;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Screen System ── */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* ── Title Screen ── */
+#screen-title {
+  align-items: center;
+  justify-content: center;
+}
+
+.title-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #FFF0E0 0%, #FFE4D6 50%, #FFF8F0 100%);
+  z-index: 0;
+}
+
+.title-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-lg);
+  padding: var(--sp-xl) var(--sp-lg);
+  text-align: center;
+}
+
+.title-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.character-placeholder {
+  font-size: 80px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px var(--color-shadow));
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.title-text {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--color-primary);
+  text-shadow: 2px 3px 0 var(--color-secondary);
+  letter-spacing: 0.05em;
+}
+
+.title-sub {
+  font-size: 1.1rem;
+  color: var(--color-text-sub);
+  letter-spacing: 0.2em;
+}
+
+.title-desc {
+  font-size: 0.95rem;
+  color: var(--color-text-sub);
+  margin-top: var(--sp-xs);
+}
+
+.title-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  width: 100%;
+  max-width: 280px;
+}
+
+.title-version {
+  font-size: 0.75rem;
+  color: var(--color-border);
+}
+
+/* ── Buttons ── */
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--r-full);
+  padding: 12px 28px;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) ease;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.95) !important;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 #C8622A, 0 6px 12px var(--color-shadow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #C8622A, 0 8px 16px var(--color-shadow);
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  box-shadow: 0 3px 0 var(--color-border);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary-light);
+}
+
+.btn-icon {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  border-radius: var(--r-md);
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.btn-icon:hover {
+  border-color: var(--color-primary);
+}
+
+/* ── Generic Screen Header ── */
+.screen-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-lg);
+  background: var(--color-surface);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.screen-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-text);
+}
+
+/* ── Scrollable content area ── */
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-lg);
+}
+
+/* ── Utility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0,0,0,0);
+  overflow: hidden;
+}

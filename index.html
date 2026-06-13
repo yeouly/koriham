@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>코리햄 KoriHam — 한국어 생활 시뮬레이션</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Nanum+Round+Square:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/global.css" />
+  <link rel="stylesheet" href="styles/map.css" />
+  <link rel="stylesheet" href="styles/game.css" />
+  <link rel="stylesheet" href="styles/cards.css" />
+  <link rel="stylesheet" href="styles/badges.css" />
+</head>
+<body>
+
+  <!-- ===== TITLE SCREEN ===== -->
+  <div id="screen-title" class="screen active">
+    <div class="title-bg"></div>
+    <div class="title-content">
+      <div class="title-logo">
+        <div class="character-placeholder">🐹</div>
+        <h1 class="title-text">코리햄</h1>
+        <p class="title-sub">KoriHam</p>
+        <p class="title-desc">한국 생활을 체험하며 한국어를 배워요!</p>
+      </div>
+      <div class="title-buttons">
+        <button class="btn btn-primary" id="btn-start">게임 시작</button>
+        <button class="btn btn-secondary" id="btn-collection">표현 카드</button>
+        <button class="btn btn-secondary" id="btn-badges">생존 뱃지</button>
+      </div>
+      <p class="title-version">v0.1.0</p>
+    </div>
+  </div>
+
+  <!-- ===== MAP SCREEN ===== -->
+  <div id="screen-map" class="screen">
+    <div class="map-header">
+      <h2>우리 동네</h2>
+      <div class="map-header-right">
+        <button class="btn btn-icon" id="btn-map-cards" title="표현 카드">📖</button>
+        <button class="btn btn-icon" id="btn-map-badges" title="생존 뱃지">🏅</button>
+        <button class="btn btn-icon" id="btn-map-home" title="타이틀로">🏠</button>
+      </div>
+    </div>
+    <div class="map-container" id="map-container">
+      <!-- Buildings rendered by MapScreen.js -->
+    </div>
+    <div class="map-hint">건물을 눌러 한국어 미션을 시작하세요!</div>
+  </div>
+
+  <!-- ===== GAME SCREEN ===== -->
+  <div id="screen-game" class="screen">
+    <div class="game-header">
+      <button class="btn btn-icon" id="btn-game-back" title="지도로">←</button>
+      <div class="game-scenario-title" id="game-scenario-title">—</div>
+      <div class="game-progress" id="game-progress">0 / 0</div>
+    </div>
+
+    <div class="game-scene">
+      <div class="scene-bg" id="scene-bg"></div>
+      <div class="scene-npc" id="scene-npc"></div>
+      <div class="scene-character">🐹</div>
+    </div>
+
+    <div class="dialogue-box" id="dialogue-box">
+      <div class="dialogue-speaker" id="dialogue-speaker"></div>
+      <div class="dialogue-text" id="dialogue-text">…</div>
+    </div>
+
+    <div class="choices-container" id="choices-container">
+      <!-- Choice buttons injected by ChoiceHandler.js -->
+    </div>
+
+    <div class="speech-panel" id="speech-panel" style="display:none;">
+      <button class="btn btn-speech" id="btn-speech">🎙️ 발음해보기</button>
+      <div class="speech-result" id="speech-result"></div>
+    </div>
+
+    <div class="feedback-overlay" id="feedback-overlay" style="display:none;">
+      <div class="feedback-content" id="feedback-content"></div>
+      <button class="btn btn-primary" id="btn-feedback-next">다음 →</button>
+    </div>
+  </div>
+
+  <!-- ===== RESULT SCREEN ===== -->
+  <div id="screen-result" class="screen">
+    <div class="result-content" id="result-content">
+      <!-- Rendered by ResultScreen.js -->
+    </div>
+  </div>
+
+  <!-- ===== CARD BOOK SCREEN ===== -->
+  <div id="screen-cards" class="screen">
+    <div class="screen-header">
+      <button class="btn btn-icon" id="btn-cards-back">←</button>
+      <h2>표현 카드 📖</h2>
+    </div>
+    <div class="cards-grid" id="cards-grid">
+      <!-- Rendered by CardBook.js -->
+    </div>
+  </div>
+
+  <!-- ===== BADGE SCREEN ===== -->
+  <div id="screen-badges" class="screen">
+    <div class="screen-header">
+      <button class="btn btn-icon" id="btn-badges-back">←</button>
+      <h2>생존 뱃지 🏅</h2>
+    </div>
+    <div class="badges-grid" id="badges-grid">
+      <!-- Rendered by BadgeScreen.js -->
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script type="module" src="src/system/AudioManager.js"></script>
+  <script type="module" src="src/system/ProgressManager.js"></script>
+  <script type="module" src="src/system/CardCollection.js"></script>
+  <script type="module" src="src/system/BadgeManager.js"></script>
+  <script type="module" src="src/game/DialogueEngine.js"></script>
+  <script type="module" src="src/game/ChoiceHandler.js"></script>
+  <script type="module" src="src/game/SpeechRecognition.js"></script>
+  <script type="module" src="src/game/SceneManager.js"></script>
+  <script type="module" src="src/ui/MapScreen.js"></script>
+  <script type="module" src="src/ui/GameScreen.js"></script>
+  <script type="module" src="src/ui/ResultScreen.js"></script>
+  <script type="module" src="src/ui/CardBook.js"></script>
+  <script type="module" src="src/ui/BadgeScreen.js"></script>
+</body>
+</html>

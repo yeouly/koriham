@@ -1,0 +1,34 @@
+{
+  "cards": [
+    {
+      "id": "card_cvs_001",
+      "scenarioId": "CVS_001",
+      "icon": "🛒",
+      "korean": "네, 주세요.",
+      "romanization": "ne, juseyo",
+      "meaning": "Yes, please.",
+      "context": "Politely accepting or requesting something",
+      "rarity": "common"
+    },
+    {
+      "id": "card_subway_001",
+      "scenarioId": "SUBWAY_001",
+      "icon": "🚇",
+      "korean": "어디서 내려요?",
+      "romanization": "eodiseo naeryeoyo",
+      "meaning": "Where do I get off?",
+      "context": "Asking about subway exits",
+      "rarity": "common"
+    },
+    {
+      "id": "card_restaurant_001",
+      "scenarioId": "RESTAURANT_001",
+      "icon": "🍚",
+      "korean": "비빔밥 하나 주세요.",
+      "romanization": "bibimbap hana juseyo",
+      "meaning": "One bibimbap, please.",
+      "context": "Ordering food at a restaurant",
+      "rarity": "common"
+    }
+  ]
+}
